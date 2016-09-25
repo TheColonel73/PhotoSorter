@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portland.FileUtils", "Portland.FileUtils\Portland.FileUtils.csproj", "{EEC17F55-06DD-4812-85A7-13004E13D679}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness\TestHarness.csproj", "{F691C8E3-B177-49A7-8FCA-834E61D37310}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEC17F55-06DD-4812-85A7-13004E13D679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC17F55-06DD-4812-85A7-13004E13D679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC17F55-06DD-4812-85A7-13004E13D679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC17F55-06DD-4812-85A7-13004E13D679}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F691C8E3-B177-49A7-8FCA-834E61D37310}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F691C8E3-B177-49A7-8FCA-834E61D37310}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F691C8E3-B177-49A7-8FCA-834E61D37310}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F691C8E3-B177-49A7-8FCA-834E61D37310}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
