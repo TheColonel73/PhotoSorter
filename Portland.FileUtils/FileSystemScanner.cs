@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ExifLib;
+
 namespace Portland.FileUtils
 {
     public class FileSystemScanner
@@ -37,6 +39,70 @@ namespace Portland.FileUtils
             DistributeTaskBatch();
         }
 
+        public static void GetJpegFiles(string topLevelDirectory)
+        {
+            DirectoryInfo di = new DirectoryInfo(topLevelDirectory);
+
+            Parallel.ForEach(di.GetFiles("*.jpg",SearchOption.AllDirectories), file =>
+              {
+                  try
+                  {
+                      Console.WriteLine(file);
+                  }
+                  catch (UnauthorizedAccessException ex)
+                  {
+                      return;
+                  }
+              });
+
+        }
+
+        public static void GetAllFiles(string topLevelDirectory)
+        {
+
+
+                // Return an array produced by a PLINQ query
+                Task<string[]> task1 = Task<string[]>.Factory.StartNew(() =>
+                {
+                    string path = topLevelDirectory;
+                    string[] files = Directory.GetFiles(path,"*",SearchOption.AllDirectories);
+
+                    var result = (from file in files.AsParallel()
+                                  let info = new FileInfo(file)
+                                  where info.Extension.ToLower() == ".jpg"
+                                  select file).ToArray();
+
+                    return result;
+                });
+
+                
+                foreach (string fi in task1.Result)
+                {
+                    using(FileStream fs = File.OpenRead(fi))
+                    {
+                        try
+                        {
+                            JpegInfo jpegInfo = ExifReader.ReadJpeg(fs);
+                        }
+                        catch(OverflowException ofEx)
+                        {
+                            Console.WriteLine("Issue with: " + fi);
+                        }
+                        finally
+                        {
+                            fs.Close();
+                        }
+                        
+                    }
+                }
+
+            if (task1.IsCompleted)
+            {
+                Console.Write("Files found: " + task1.Result.Length.ToString());
+            }
+        }
+
+        //TODO: Make static
         private void DistributeTaskBatch()
         {
             int i = 0;
